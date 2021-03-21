@@ -18,7 +18,11 @@ function Book(props) {
                     <li key={book.title}>
                         <div className="book">
                           <div className="book-top">
-                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` || './icons/add.svg'}}></div>
+                          {  book.hasOwnProperty('imageLinks')  ?
+                           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
+                            :
+                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:   './icons/add.svg'}}></div>
+                          }     
                             <div className="book-shelf-changer">
                               <select defaultValue={'currentlyReading'} onChange={ (e)=>{props.handleNewState(e, book) }}>
                                 <option value="move" disabled>Move to...</option>
@@ -30,7 +34,13 @@ function Book(props) {
                             </div>
                           </div>
                           <div className="book-title">{book.title}</div>
-                          <div className="book-authors">{book.authors[0]}</div>
+                          { book.hasOwnProperty('authors')?
+                            book.authors.map(author=>
+                              <div className="book-authors" key={author}>{author}</div>
+                            )
+                          :
+                          <div className="book-authors"></div>
+                        }
                         </div>
                       </li>
                     ))}
@@ -47,8 +57,12 @@ function Book(props) {
                         <li key={book.title}>
                           <div className="book">
                             <div className="book-top">
-                              <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})` || './icons/add.svg' }}></div>
-                              <div className="book-shelf-changer">
+                            {  book.hasOwnProperty('imageLinks')  ?
+                           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
+                            :
+                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:   './icons/add.svg'}}></div>
+                            }  
+                            <div className="book-shelf-changer">
                                 <select defaultValue={'wantToRead'} onChange={(e)=>{props.handleNewState(e, book)}}>
                                   <option value="move" disabled>Move to...</option>
                                   <option value="currentlyReading">Currently Reading</option>
@@ -59,7 +73,13 @@ function Book(props) {
                               </div>
                             </div>
                             <div className="book-title">{book.title}</div>
-                            <div className="book-authors">{book.authors[0]}</div>
+                            { book.hasOwnProperty('authors')?
+                            book.authors.map(author=>
+                              <div className="book-authors" key={author}>{author}</div>
+                            )
+                            :
+                              <div className="book-authors"></div>
+                            }
                           </div>
                         </li>
                       ))}
@@ -76,7 +96,11 @@ function Book(props) {
                         <li key={book.title}>
                           <div className="book">
                             <div className="book-top">
-                              <div className="book-cover" style={{ width: 128, height: 192, backgroundImage: `url(${book.imageLinks.smallThumbnail})` || './icons/add.svg'}}></div>
+                            {  book.hasOwnProperty('imageLinks')  ?
+                           <div className="book-cover" style={{ width: 128, height: 193, backgroundImage: `url(${book.imageLinks.smallThumbnail})`}}></div>
+                            :
+                            <div className="book-cover" style={{ width: 128, height: 193, backgroundImage:   './icons/add.svg'}}></div>
+                          }  
                               <div className="book-shelf-changer">
                                 <select defaultValue={'read'} onChange={(e)=>{props.handleNewState(e, book)}}>
                                   <option value="move" disabled>Move to...</option>
@@ -88,7 +112,13 @@ function Book(props) {
                               </div>
                             </div>
                             <div className="book-title">{book.title}</div>
-                            <div className="book-authors">{book.authors[0]}</div>
+                            { book.hasOwnProperty('authors')?
+                            book.authors.map(author=>
+                              <div className="book-authors" key={author}>{author}</div>
+                            )
+                            :
+                              <div className="book-authors"></div>
+                            }
                           </div>
                         </li>
                       ))

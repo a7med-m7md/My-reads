@@ -7,7 +7,7 @@ import Search from "./Search"
 
 class BooksApp extends React.Component {
   state = {
-    books: []
+    books: [],
   }
   async componentDidMount(){
     const val = await BooksAPI.getAll()
@@ -15,7 +15,7 @@ class BooksApp extends React.Component {
   }
 
   newState = []
-  handleChange = (e, item)=>
+  handleChange = (e, item)=>(
     this.state.books.map((currState)=>{
       if(currState.title === item){
         currState.shelf = e.target.value
@@ -25,12 +25,19 @@ class BooksApp extends React.Component {
         this.newState.push(currState)
       }
     })
-  
+  )
     handleNewState = (e,item)=>{
+      if(!(item in this.state.books)){
+          item.shelf = e.target.value
+          const books = [...this.state.books, item]
+          this.setState({books})
+      }
       this.handleChange(e, item.title)
-      this.setState(this.newState)
       BooksAPI.update(item, e.target.value)
     }
+
+  
+  x
   
   render() {
     return (
@@ -48,6 +55,7 @@ class BooksApp extends React.Component {
           <Search 
               books={this.state.books}
               handleNewState={this.handleNewState}
+              find = {this.find}
           />
         )
       }
